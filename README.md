@@ -1,27 +1,20 @@
 # Tinyurl
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
+## 模块
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- 标题栏 Header
+  - Logo + Title
+  - Menu(Optional)
+  - User Head(Optional)
+- 主体 Body
+  - 地址输入框
+  - 地址展示框
+  - 切换历史界面
+    - 历史纪录列表
+    - 返回主页
+- 页脚版权
+  - 版权所有
+  - 使用声明
+- 全局 Global
+  - Wave
+  - Link
