@@ -1,4 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css');
+
+html {
+  font-family: 'Fira Code', 'Consolas', 'Microsoft Yahei', sans-serif;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+@supports (font-variation-settings: normal) {
+  code {
+    font-family: 'Fira Code VF', monospace;
+  }
+}
+
 body {
   margin    : 0;
   padding   : 0;
