@@ -1,0 +1,47 @@
+:host {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  position        : fixed;
+  top             : 0;
+  left            : 0;
+  height          : 100vh;
+  width           : 100vw;
+  overflow        : hidden;
+  background-color: #00000085;
+  z-index         : 10;
+}
+
+.grid {
+  display       : flex;
+  flex-direction: row;
+  flex-wrap     : wrap;
+  width         : 6rem;
+  height        : 2rem;
+
+  >.cube {
+    height          : 100%;
+    flex-grow       : 1;
+    background-color: white;
+    animation       : CubeGridScale 1.5s infinite ease-in-out;
+  }
+
+  @for $i from 1 through 9 {
+    .cube:nth-child(#{$i}) {
+      animation-delay: $i / 10 + 0.2 + s;
+    }
+  }
+}
+
+@keyframes CubeGridScale {
+
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  40%,
+  50% {
+    transform: scale(0.1, 0.1);
+  }
+}
