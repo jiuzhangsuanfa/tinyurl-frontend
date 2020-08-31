@@ -55,9 +55,17 @@
   justify-content: space-between;
   align-items    : center;
 
-  width  : calc(100% - 2 * 2rem);
-  height : 2rem;
-  padding: 0 2rem;
+  width    : calc(100% - 2 * 2rem);
+  height   : 2rem;
+  padding  : 0 2rem;
+  color    : gray;
+  font-size: xx-small;
+
+  >.copyright {
+    >a {
+      color: inherit;
+    }
+  }
 }
 
 #wave {
