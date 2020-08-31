@@ -1,4 +1,20 @@
-<router-outlet></router-outlet>
+<header id="header">
+  <img src="assets/company-logo.svg" alt="九章算法" class="logo">
+  <h2 class="title">
+    <img src="https://cdn.jsdelivr.net/gh/devindon/api/image/link-icon.png" alt="icon" class="icon">
+    <span class="text">TinyURL - 短网址项目课</span>
+  </h2>
+</header>
+
+<section id="body">
+  <router-outlet></router-outlet>
+</section>
+
+<footer id="footer">
+  Footer
+</footer>
+
+<app-loading *ngIf="false"></app-loading>
 
 <svg id="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
   <path fill="#0099ff" fill-opacity="1"
