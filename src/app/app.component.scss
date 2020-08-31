@@ -10,6 +10,7 @@
   width  : calc(100% - 2 * 2rem);
   height : 4rem;
   padding: 0 2rem;
+  color  : white;
 
   display        : flex;
   flex-direction : row;
@@ -17,8 +18,8 @@
   align-items    : center;
 
   >.logo {
-    height: 40px;
-    filter: invert(1);
+    height   : 40px;
+    // filter: invert(1); // enable if header background-color is light
   }
 
   >.title {
@@ -55,7 +56,7 @@
 
 #wave {
   position: fixed;
-  bottom  : 0;
+  top     : 0;
   left    : 0;
   z-index : -1;
 }
