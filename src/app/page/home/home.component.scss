@@ -1,0 +1,18 @@
+:host {
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items    : center;
+
+  flex-grow: 1;
+}
+
+form {
+  .mat-form-field {
+    width: 80vw;
+
+    button {
+      height: 100%;
+    }
+  }
+}

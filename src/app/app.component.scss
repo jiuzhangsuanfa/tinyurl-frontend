@@ -43,6 +43,11 @@
       }
 
       >.text {
+        font-family: 'Fira Code VF',
+          'Fira Code',
+          'Microsoft Yahei',
+          'PingFangSC-Regular',
+          sans-serif;
         font-size  : 1rem;
         font-weight: normal;
       }
@@ -65,8 +70,7 @@
   align-items    : center;
 
   width    : calc(100% - 2 * 2rem);
-  height   : 2rem;
-  padding  : 0 2rem;
+  padding  : 0.5rem 2rem;
   color    : gray;
   font-size: xx-small;
 
@@ -74,5 +78,29 @@
     >a {
       color: inherit;
     }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  #header {
+
+    >.toolbar {
+      display        : flex;
+      flex-direction : row;
+      justify-content: space-between;
+      align-items    : center;
+
+      width  : auto;
+      height : 3rem;
+      padding: 0 1rem;
+
+      >.logo {
+        height: 2rem;
+      }
+    }
+  }
+
+  #footer {
+    flex-direction: column;
   }
 }
