@@ -24,6 +24,10 @@
     .mat-form-field {
       width: 100%;
     }
+
+    button.mobile {
+      display: none !important;
+    }
   }
 }
 
@@ -41,7 +45,11 @@
       width: 80vw;
     }
 
-    button {
+    button.desktop {
+      display: none !important;
+    }
+
+    button.mobile {
       width: 100%;
     }
   }

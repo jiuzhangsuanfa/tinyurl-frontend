@@ -91,13 +91,17 @@
   </svg>
 </div>
 
-<form onsubmit="return false">
+<form [formGroup]="form" onsubmit="return false">
   <mat-form-field onsubmit="return false" appearance="outline">
-    <input matInput formControlName="name" placeholder="https://your.example.com/some/path" autocomplete="off">
-    <mat-label>Input your long long link</mat-label>
+    <input matInput formControlName="url" placeholder="https://your.example.com/some/path" autocomplete="off"
+      (input)="onInput()">
+    <mat-label>Make your link Shorter & Faster</mat-label>
+    <button class="desktop" [disabled]="form.invalid" mat-icon-button matSuffix>
+      <mat-icon>{{ icon }}</mat-icon>
+    </button>
   </mat-form-field>
 
-  <button color="primary" mat-raised-button>Shorten</button>
+  <button class="mobile" color="primary" [disabled]="form.invalid" mat-raised-button>Shorten</button>
 </form>
 
 <section class="result">
