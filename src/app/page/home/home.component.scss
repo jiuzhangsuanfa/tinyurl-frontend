@@ -7,12 +7,34 @@
   flex-grow: 1;
 }
 
-form {
-  .mat-form-field {
-    width: 80vw;
+@media screen and (min-width: 992px) {
+  h2 {
+    text-align: center;
+  }
+
+  form {
+    display        : flex;
+    flex-direction : row;
+    justify-content: center;
+    align-items    : center;
+
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  form {
+    display       : flex;
+    flex-direction: column;
+
+    .mat-form-field {
+      width: 80vw;
+    }
 
     button {
-      height: 100%;
+      width: 100%;
     }
   }
 }
