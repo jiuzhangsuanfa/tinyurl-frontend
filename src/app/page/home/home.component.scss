@@ -8,8 +8,9 @@
 }
 
 @media screen and (min-width: 992px) {
-  h2 {
-    text-align: center;
+  .logo {
+    width    : calc(20vw + 20rem);
+    max-width: 30rem;
   }
 
   form {
@@ -18,6 +19,8 @@
     justify-content: center;
     align-items    : center;
 
+    width: 80%;
+
     .mat-form-field {
       width: 100%;
     }
@@ -25,6 +28,11 @@
 }
 
 @media screen and (max-width: 991px) {
+  .logo {
+    width    : 90%;
+    max-width: 30rem;
+  }
+
   form {
     display       : flex;
     flex-direction: column;
