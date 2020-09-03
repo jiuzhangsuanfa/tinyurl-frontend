@@ -99,7 +99,7 @@
     <mat-icon matSuffix style="color: #949494;" [matTooltip]="tip">{{ icon }}</mat-icon>
   </mat-form-field>
 
-  <button class="mobile" color="primary" [disabled]="form.invalid || loading" (click)="submit()" mat-raised-button>
+  <button color="primary" [disabled]="form.invalid || loading" (click)="submit()" mat-raised-button>
     <ng-container *ngIf="loading; else elseTemplate">
       <app-loading style="margin: 2px auto;"></app-loading>
     </ng-container>

@@ -18,14 +18,17 @@
     justify-content: center;
     align-items    : center;
 
-    width: 80%;
+    width: 60%;
 
     .mat-form-field {
       width: 100%;
     }
 
-    button.mobile {
-      display: none !important;
+    button {
+      height   : 59.1px;
+      margin   : 4px 0 25.5px 1rem;
+      width    : 20%;
+      min-width: 10rem;
     }
   }
 }
@@ -48,11 +51,7 @@
       width: 80vw;
     }
 
-    button.desktop {
-      display: none !important;
-    }
-
-    button.mobile {
+    button {
       width: 100%;
     }
   }
