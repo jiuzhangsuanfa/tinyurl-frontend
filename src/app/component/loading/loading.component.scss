@@ -29,7 +29,7 @@
 
   @for $i from 1 through 9 {
     .cube:nth-child(#{$i}) {
-      animation-delay: $i / 10 + 0.2 + s;
+      animation-delay: $i / 10 + s;
     }
   }
 }
