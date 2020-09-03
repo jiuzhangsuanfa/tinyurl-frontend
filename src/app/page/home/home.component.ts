@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { of } from 'rxjs';
+import { delay, finalize, tap } from 'rxjs/operators';
 
 const URL_REG = /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].[a-z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+\/?)$/;
 
@@ -13,9 +16,12 @@ export class HomeComponent implements OnInit {
   icon: 'help_outline' | 'link' | 'link_off' = 'help_outline';
   tip: 'Enter your link to continue' | 'Generate short link' | 'Restore original links' = 'Enter your link to continue';
   button: 'Invalid' | 'Shorten' | 'Restore' = 'Shorten';
+  loading: boolean = false;
   form: FormGroup;
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
     this.form = new FormGroup({
       url: new FormControl(
         undefined,
@@ -33,6 +39,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() { }
 
   onInput() {
+    console.log(this.form.get('url').value)
     const match = this.form.get('url').value.match(URL_REG);
     if (!match) {
       // 未输入或输入的不是 URL
@@ -50,6 +57,32 @@ export class HomeComponent implements OnInit {
       this.tip = 'Restore original links';
       this.button = 'Restore';
     }
+  }
+
+  submit() {
+    // this.http
+    //   .post('http://mock.don.red/tinyurl', { url: this.form.get('url').value })
+    //   .pipe(
+    //     tap(() => this.loading = true),
+    //     catchError(() => of({ url: 'https://don.red/s/abcdef123' })),
+    //     finalize(() => this.loading = false)
+    //   )
+    //   .subscribe((response: { url: string }) => {
+    //     console.log(response);
+    //     this.form.setValue({ url: response.url });
+    //     this.onInput();
+    //   });
+    of({ url: 'https://don.red/s/abcdef123' })
+      .pipe(
+        tap(() => this.loading = true),
+        delay(1000),
+        finalize(() => this.loading = false)
+      )
+      .subscribe((response: { url: string }) => {
+        console.log(response);
+        this.form.setValue({ url: response.url });
+        this.onInput();
+      });
   }
 
 }

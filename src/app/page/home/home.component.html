@@ -94,12 +94,19 @@
 <form [formGroup]="form" onsubmit="return false">
   <mat-form-field onsubmit="return false" appearance="outline">
     <input matInput formControlName="url" placeholder="https://your.example.com/some/path" autocomplete="off" type="url"
-      (input)="onInput()">
+      (input)="onInput()" [readOnly]="loading">
     <mat-label>Shorten your link</mat-label>
     <mat-icon matSuffix style="color: #949494;" [matTooltip]="tip">{{ icon }}</mat-icon>
   </mat-form-field>
 
-  <button class="mobile" color="primary" [disabled]="form.invalid" mat-raised-button>{{ button }}</button>
+  <button class="mobile" color="primary" [disabled]="form.invalid || loading" (click)="submit()" mat-raised-button>
+    <ng-container *ngIf="loading; else elseTemplate">
+      <app-loading style="margin: 2px auto;"></app-loading>
+    </ng-container>
+    <ng-template #elseTemplate>
+      {{ button }}
+    </ng-template>
+  </button>
 </form>
 
 <section class="result">

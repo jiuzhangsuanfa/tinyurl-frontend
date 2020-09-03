@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentModule } from '../component/component.module';
@@ -13,7 +14,8 @@ import { PolicyComponent } from './policy/policy.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentModule
+    ComponentModule,
+    HttpClientModule
   ],
   exports: [HomeComponent]
 })
