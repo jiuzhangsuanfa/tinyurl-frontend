@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay, finalize, tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const URL_REG = /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].[a-z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+\/?)$/;
 
@@ -13,6 +14,8 @@ const URL_REG = /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-z_!~*'().&=+$%-]+: )?[
 })
 export class HomeComponent implements OnInit {
 
+  @ViewChild('input') input: ElementRef<HTMLInputElement>;
+
   icon: 'help_outline' | 'link' | 'link_off' = 'help_outline';
   tip: 'Enter your link to continue' | 'Generate short link' | 'Restore original links' = 'Enter your link to continue';
   button: 'Invalid' | 'Shorten' | 'Restore' = 'Shorten';
@@ -20,7 +23,8 @@ export class HomeComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private bar: MatSnackBar
   ) {
     this.form = new FormGroup({
       url: new FormControl(
@@ -78,10 +82,12 @@ export class HomeComponent implements OnInit {
         delay(1000),
         finalize(() => this.loading = false)
       )
-      .subscribe((response: { url: string }) => {
-        console.log(response);
-        this.form.setValue({ url: response.url });
+      .subscribe(({ url }: { url: string }) => {
+        this.form.setValue({ url });
+        this.input.nativeElement.select();
+        document.execCommand('copy');
         this.onInput();
+        this.bar.open('Link has been copied.', 'Got it');
       });
   }
 

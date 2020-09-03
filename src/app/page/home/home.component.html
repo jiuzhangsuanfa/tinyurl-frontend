@@ -93,8 +93,8 @@
 
 <form [formGroup]="form" onsubmit="return false">
   <mat-form-field onsubmit="return false" appearance="outline">
-    <input matInput formControlName="url" placeholder="https://your.example.com/some/path" autocomplete="off" type="url"
-      (input)="onInput()" [readOnly]="loading">
+    <input #input matInput formControlName="url" placeholder="https://your.example.com/some/path" autocomplete="off"
+      type="url" (input)="onInput()" [readOnly]="loading">
     <mat-label>Shorten your link</mat-label>
     <mat-icon matSuffix style="color: #949494;" [matTooltip]="tip">{{ icon }}</mat-icon>
   </mat-form-field>
