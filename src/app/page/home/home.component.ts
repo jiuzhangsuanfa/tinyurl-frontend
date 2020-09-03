@@ -10,7 +10,9 @@ const URL_REG = /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-z_!~*'().&=+$%-]+: )?[
 })
 export class HomeComponent implements OnInit {
 
-  icon: 'sync_alt' | 'arrow_back' | 'arrow_forward' = 'sync_alt';
+  icon: 'help_outline' | 'link' | 'link_off' = 'help_outline';
+  tip: 'Enter your link to continue' | 'Generate short link' | 'Restore original links' = 'Enter your link to continue';
+  button: 'Invalid' | 'Shorten' | 'Restore' = 'Shorten';
   form: FormGroup;
 
   constructor() {
@@ -33,11 +35,20 @@ export class HomeComponent implements OnInit {
   onInput() {
     const match = this.form.get('url').value.match(URL_REG);
     if (!match) {
-      this.icon = 'sync_alt';
-    } else if (!match[5] || match[5] !== 's.don.red') {
-      this.icon = 'arrow_forward';
+      // 未输入或输入的不是 URL
+      this.icon = 'help_outline';
+      this.tip = 'Enter your link to continue';
+      this.button = 'Invalid';
+    } else if (!match[5] || !match[5].includes('don.red')) {
+      // 输入的是外链
+      this.icon = 'link';
+      this.tip = 'Generate short link';
+      this.button = 'Shorten';
     } else {
-      this.icon = 'arrow_back';
+      // 输入的是短链
+      this.icon = 'link_off';
+      this.tip = 'Restore original links';
+      this.button = 'Restore';
     }
   }
 
