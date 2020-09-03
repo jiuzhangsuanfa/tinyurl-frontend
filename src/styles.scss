@@ -57,7 +57,7 @@ a:hover {
   color: #0180d4;
 }
 
-a::after {
+a.animation::after {
   content: '';
 
   width   : 100%;
@@ -72,7 +72,7 @@ a::after {
   transition      : all .35s;
 }
 
-a:hover::after {
+a.animation:hover::after {
   transform       : scale(1);
   transform-origin: right;
 }

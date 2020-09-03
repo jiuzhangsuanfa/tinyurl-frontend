@@ -24,8 +24,12 @@
     color  : white;
 
     >.logo {
-      height   : 40px;
-      // filter: invert(1); // enable if header background-color is light
+      height: 40px;
+
+      >img {
+        height   : 40px;
+        // filter: invert(1); // enable if header background-color is light
+      }
     }
 
     >.title {
@@ -90,6 +94,10 @@
 
       >.logo {
         height: 2rem;
+
+        >img {
+          height: 2rem;
+        }
       }
     }
   }

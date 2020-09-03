@@ -1,8 +1,9 @@
 <header id="header">
   <section class="toolbar">
-    <img src="assets/company-logo.svg" alt="九章算法" class="logo">
-    <a class="title" href="https://jiuzhang.com" target="_blank" matTooltip="点击前往项目课首页" [matTooltipShowDelay]="300"
-      [matTooltipHideDelay]="300">
+    <a class="logo" href="https://jiuzhang.com">
+      <img src="assets/company-logo.svg" alt="九章算法">
+    </a>
+    <a class="title" href="https://jiuzhang.com" target="_blank" matTooltip="点击前往项目课首页">
       <img src="../assets/logo.svg" alt="Logo" class="icon">
       <span class="text">TinyURL</span>
     </a>
@@ -14,8 +15,9 @@
 </section>
 
 <footer id="footer">
-  <span class="copyright">Copyright © 2013-2020 <a href="https://www.jiuzhang.com/" target="_blank">九章算法</a></span>
-  <span class="policy">点击生成短网址，即代表您同意<a [routerLink]="[ '/policy' ]">《用户与隐私协议》</a></span>
+  <span class="copyright">Copyright © 2013-2020 <a class="animation" href="https://www.jiuzhang.com/"
+      target="_blank">九章算法</a></span>
+  <span class="policy">点击生成短网址，即代表您同意<a class="animation" [routerLink]="[ '/policy' ]">《用户与隐私协议》</a></span>
 </footer>
 
 <app-loading *ngIf="false"></app-loading>
