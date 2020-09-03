@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
         this.input.nativeElement.select();
         document.execCommand('copy');
         this.onInput();
-        this.bar.open('Link has been copied.', 'Got it');
+        this.bar.open('Link has been copied.', 'Got it', { duration: 3000 });
       });
   }
 
