@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { of } from 'rxjs';
-import { delay, finalize, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { of } from 'rxjs';
+import { catchError, delay, finalize, tap } from 'rxjs/operators';
 
 const URL_REG = /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].[a-z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+\/?)$/;
 
@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() { }
 
   onInput() {
-    console.log(this.form.get('url').value)
     const match = this.form.get('url').value.match(URL_REG);
     if (!match) {
       // 未输入或输入的不是 URL
@@ -64,22 +63,16 @@ export class HomeComponent implements OnInit {
   }
 
   submit() {
-    // this.http
-    //   .post('http://mock.don.red/tinyurl', { url: this.form.get('url').value })
-    //   .pipe(
-    //     tap(() => this.loading = true),
-    //     catchError(() => of({ url: 'https://don.red/s/abcdef123' })),
-    //     finalize(() => this.loading = false)
-    //   )
-    //   .subscribe((response: { url: string }) => {
-    //     console.log(response);
-    //     this.form.setValue({ url: response.url });
-    //     this.onInput();
-    //   });
-    of({ url: 'https://don.red/s/abcdef123' })
+    console.log(this.form.get('url').value)
+    this.http
+      .post('http://mock.don.red/tinyurl', { url: this.form.get('url').value })
       .pipe(
         tap(() => this.loading = true),
         delay(1000),
+        catchError(() => {
+          this.bar.open('URL get failed');
+          return of({ url: '' });
+        }),
         finalize(() => this.loading = false)
       )
       .subscribe(({ url }: { url: string }) => {
@@ -89,6 +82,19 @@ export class HomeComponent implements OnInit {
         this.onInput();
         this.bar.open('Link has been copied.', 'Got it', { duration: 3000, horizontalPosition: 'end' });
       });
+    // of({ url: 'https://don.red/s/abcdef123' })
+    //   .pipe(
+    //     tap(() => this.loading = true),
+    //     delay(1000),
+    //     finalize(() => this.loading = false)
+    //   )
+    //   .subscribe(({ url }: { url: string }) => {
+    //     this.form.setValue({ url });
+    //     this.input.nativeElement.select();
+    //     document.execCommand('copy');
+    //     this.onInput();
+    //     this.bar.open('Link has been copied.', 'Got it', { duration: 3000, horizontalPosition: 'end' });
+    //   });
   }
 
 }
