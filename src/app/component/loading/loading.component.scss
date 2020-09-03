@@ -1,18 +1,18 @@
-:host {
-  display         : flex;
-  justify-content : center;
-  align-items     : center;
-  position        : fixed;
-  top             : 0;
-  left            : 0;
-  height          : 100vh;
-  width           : 100vw;
-  overflow        : hidden;
-  background-color: #00000085;
-  z-index         : 10;
-}
+// :host {
+//   display         : flex;
+//   justify-content : center;
+//   align-items     : center;
+//   position        : fixed;
+//   top             : 0;
+//   left            : 0;
+//   height          : 100vh;
+//   width           : 100vw;
+//   overflow        : hidden;
+//   background-color: #00000085;
+//   z-index         : 10;
+// }
 
-.grid {
+:host {
   display       : flex;
   flex-direction: row;
   flex-wrap     : wrap;
