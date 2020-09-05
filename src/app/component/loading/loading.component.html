@@ -1,9 +1,3 @@
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
-<div class="cube" [ngStyle]="{'background-color': color}"></div>
+<ng-container *ngFor="let item of [].constructor(9)">
+  <div class="cube" [ngStyle]="{'background-color': color}"></div>
+</ng-container>
