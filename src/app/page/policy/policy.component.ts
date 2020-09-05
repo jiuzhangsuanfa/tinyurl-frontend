@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-policy',
@@ -29,7 +29,8 @@ export class PolicyComponent implements OnInit {
 转形直八意及满圆品装小，可心因济区酸参务确采，维立杏往一助要经把。 便类业包存存件正很片，新么始空思严好做意，关水V丽器级持V。 元消看型状际组价，北济统到基养，列资6号且次。
 程史示个为强对劳，向标维保严信较做，资战开劳新生肃，虚包照辰活支。 小已现带点业根机较越红它，强节例几豆孝芦护种。 张当系发采放才院律，太你打性置月次查，积候9六难连辰。
 场听己学还参算出拉，点声也采P深断。 可角收科需了思织么论，必认查今空平广王，拉而孟克油多苏弦。
-种府者华象真很两确，四半们省影百市市听，取承各真院直就。`))
+种府者华象真很两确，四半们省影百市市听，取承各真院直就。`)),
+        delay(1000)
       )
       .subscribe((content: string) => this.paragraphs = content.split('\n').filter(v => v));
   }
