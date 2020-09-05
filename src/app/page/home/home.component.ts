@@ -63,11 +63,10 @@ export class HomeComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.get('url').value)
+    this.loading = true;
     this.http
       .post('http://mock.don.red/tinyurl', { url: this.form.get('url').value })
       .pipe(
-        tap(() => this.loading = true),
         delay(1000),
         catchError(() => {
           this.bar.open('URL get failed');
@@ -82,19 +81,6 @@ export class HomeComponent implements OnInit {
         this.onInput();
         this.bar.open('Link has been copied.', 'Got it', { duration: 3000, horizontalPosition: 'end' });
       });
-    // of({ url: 'https://don.red/s/abcdef123' })
-    //   .pipe(
-    //     tap(() => this.loading = true),
-    //     delay(1000),
-    //     finalize(() => this.loading = false)
-    //   )
-    //   .subscribe(({ url }: { url: string }) => {
-    //     this.form.setValue({ url });
-    //     this.input.nativeElement.select();
-    //     document.execCommand('copy');
-    //     this.onInput();
-    //     this.bar.open('Link has been copied.', 'Got it', { duration: 3000, horizontalPosition: 'end' });
-    //   });
   }
 
 }
