@@ -1,13 +1,14 @@
+$height: 1.6rem;
+
 :host {
   display       : flex;
   flex-direction: row;
   flex-wrap     : wrap;
   width         : 6rem;
-  height        : 1.6rem;
   padding       : 0.2rem 0;
 
   >.cube {
-    height   : 100%;
+    height   : $height;
     flex-grow: 1;
     animation: CubeGridScale 1.5s infinite ease-in-out;
     transform: scale(0.1, 0.1);
