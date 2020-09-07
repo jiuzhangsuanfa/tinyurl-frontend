@@ -1,14 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface Mapped {
-  short: string;
-  origin: string;
-}
-
-export interface Link {
-  // type: 'short' | 'origin';
-  url: string;
-}
+import { Mapped, Link } from '../@types/index';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +18,7 @@ export class CacheService {
   modify() { }
 
   select({ url }: Link) {
-    localStorage.getItem(url);
+    return localStorage.getItem(url) ?? undefined;
   }
 
 }
