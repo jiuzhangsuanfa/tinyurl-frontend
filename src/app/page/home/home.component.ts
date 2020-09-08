@@ -68,9 +68,9 @@ export class HomeComponent implements OnInit {
       .post('http://mock.don.red/tinyurl', { url: this.form.get('url').value })
       .pipe(
         delay(1000),
-        catchError(() => {
+        catchError(error => {
           this.bar.open('URL get failed');
-          return of({ url: '' });
+          throw error;
         }),
         finalize(() => this.loading = false)
       )
