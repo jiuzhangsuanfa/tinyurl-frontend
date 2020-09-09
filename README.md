@@ -1,6 +1,15 @@
 # Tinyurl
 
-## 模块
+# Usage
+
+`clone -> install -> run dev`
+
+1. `git clone git@github.com:DevinDon/tinyurl.git`
+2. `npm i`
+3. `npm run dev`
+4. Open `http://localhost:4200`
+
+# 模块
 
 - [x] 桌面端 + 移动端自适应
 - [x] 标题栏 Header
