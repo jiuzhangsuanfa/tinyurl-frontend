@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
       this.icon = 'help_outline';
       this.tip = 'Enter your link to continue';
       this.button = 'Invalid';
-    } else if (!match[5] || !match[5].includes('don.red')) {
+    } else if (!match[2] || !match[2].match(/mock.don.red\/tinyurl\//)) {
       // 输入的是外链
       this.icon = 'link';
       this.tip = 'Generate short link';
