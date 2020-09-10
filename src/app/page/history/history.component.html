@@ -1,15 +1,10 @@
 <h2 style="text-align: center;">History</h2>
 
 <div class="list">
-  <div class="item" *ngFor="let record of records">
-    <div class="link">
-      <a class="animation">{{ record.short }}</a>
-    </div>
-    <div class="icon">
-      <=>
-    </div>
-    <div class="link">
-      <a class="animation">{{ record.origin }}</a>
-    </div>
-  </div>
+  <a class="item" [href]="record.short" *ngFor="let record of records">
+    <img class="favicon" src="https://cdn.jsdelivr.net/gh/devindon/api/image/link-icon-blue.png" alt="Favicon">
+    <div class="title">TinyURL - 短网址生成器 | 九章算法九日项目课九章算法九日项目课</div>
+    <div class="link">{{ record.host }}</div>
+    <div class="time">{{ '2020-02-03 19:08:09' | date:"HH:mm" }}</div>
+  </a>
 </div>

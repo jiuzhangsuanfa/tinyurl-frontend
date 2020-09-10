@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CacheService, Result } from 'src/app/service/cache.service';
+import { CacheService, Record } from 'src/app/service/cache.service';
 
 @Component({
   selector: 'app-history',
@@ -8,7 +8,7 @@ import { CacheService, Result } from 'src/app/service/cache.service';
 })
 export class HistoryComponent implements OnInit {
 
-  records: Result[] = [];
+  records: Record[] = [];
 
   constructor(
     public cache: CacheService
