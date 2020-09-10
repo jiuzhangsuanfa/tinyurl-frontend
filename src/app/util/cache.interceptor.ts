@@ -26,10 +26,7 @@ export class CacheInterceptor implements HttpInterceptor {
           .handle(request)
           .pipe(
             filter(response => response instanceof HttpResponse),
-            tap((response: HttpResponse<Link>) => {
-              console.log({ short: request.body.url, origin: response.body.url });
-              this.cache.insert({ short: request.body.url, origin: response.body.url });
-            })
+            tap((response: HttpResponse<Link>) => this.cache.insert([request.body.url, response.body.url]))
           );
       }
 
