@@ -64,19 +64,7 @@ export class CacheService {
   }
 
   selectAll(): Record[] {
-    const caches = JSON.parse(JSON.stringify(localStorage));
-    const results: Record[] = [];
-    for (const key in caches) {
-      Object.prototype.hasOwnProperty.call(caches, key) // has own property
-        && key.match(/http:\/\/mock.don.red\/tinyurl\/s\//) // is short
-        && results.push({ // push it
-          id: key.match(/http:\/\/mock.don.red\/tinyurl\/(.*)$/)[1],
-          short: key,
-          origin: caches[key],
-          host: caches[key].match(/http[s]?:\/\/(.*?)\/.*/)[1]
-        });
-    }
-    return results;
+    return [...this.list];
   }
 
   cacheAble(request: HttpRequest<any>) {
