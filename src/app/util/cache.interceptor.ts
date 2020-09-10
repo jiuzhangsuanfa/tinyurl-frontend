@@ -17,7 +17,6 @@ export class CacheInterceptor implements HttpInterceptor {
     if (this.cache.cacheAble(request)) {
 
       const cached = this.cache.select(request.body);
-      console.log(cached);
 
       if (cached) {
         // see this issue: [Angular HTTP Client Interceptor not working when returning custom Observable](https://stackoverflow.com/questions/48048564/angular-http-client-interceptor-not-working-when-returning-custom-observable)

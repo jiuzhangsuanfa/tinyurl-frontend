@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Record {
-  origin: string;
-  short: string;
-}
+import { CacheService, Result } from 'src/app/service/cache.service';
 
 @Component({
   selector: 'app-history',
@@ -12,9 +8,13 @@ interface Record {
 })
 export class HistoryComponent implements OnInit {
 
-  records: Record[] = [];
+  records: Result[] = [];
 
-  constructor() { }
+  constructor(
+    public cache: CacheService
+  ) {
+    this.records = cache.selectAll();
+  }
 
   ngOnInit() { }
 
