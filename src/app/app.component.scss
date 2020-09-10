@@ -80,6 +80,13 @@
   }
 }
 
+@media screen and (min-width: 992px) {
+  #body {
+    max-width: 1000px;
+    margin   : 0 auto;
+  }
+}
+
 @media screen and (max-width: 991px) {
   #header {
 
