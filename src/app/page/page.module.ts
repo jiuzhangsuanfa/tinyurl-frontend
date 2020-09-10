@@ -10,9 +10,10 @@ import { MaterialModule } from '../module/material.module';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 import { PolicyComponent } from './policy/policy.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 @NgModule({
-  declarations: [HomeComponent, PolicyComponent, HistoryComponent],
+  declarations: [HomeComponent, PolicyComponent, HistoryComponent, AnalysisComponent],
   imports: [
     CommonModule,
     MaterialModule,
