@@ -1,3 +1,9 @@
+:host {
+  display       : flex;
+  flex-direction: column;
+  flex-grow     : 1;
+}
+
 .list {
   >.item {
     display         : flex;
@@ -40,6 +46,15 @@
     }
 
   }
+}
+
+.empty {
+  text-align : center;
+  font-weight: normal;
+  font-size  : small;
+  color      : gray;
+  width      : 100%;
+  margin     : auto;
 }
 
 @media screen and (min-width: 992px) {}
