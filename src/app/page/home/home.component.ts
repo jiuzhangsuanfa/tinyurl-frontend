@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { of } from 'rxjs';
 import { catchError, delay, finalize } from 'rxjs/operators';
+import { ApiService } from 'src/app/service/api.service';
 
 const URL_REG = /^(http[s]?):\/\/(.*)$/;
 
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private http: HttpClient,
+    private api: ApiService,
     private bar: MatSnackBar
   ) {
     this.form = new FormGroup({
@@ -64,8 +63,8 @@ export class HomeComponent implements OnInit {
 
   submit() {
     this.loading = true;
-    this.http
-      .post('http://mock.don.red/tinyurl', { url: this.form.get('url').value })
+    this.api
+      .transformURL({ url: this.form.get('url').value })
       .pipe(
         delay(1000),
         catchError(error => {
