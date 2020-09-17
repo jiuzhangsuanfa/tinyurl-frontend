@@ -9,46 +9,48 @@
 3. `npm run dev`
 4. Open `http://localhost:4200`
 
-# Structure
+# Project
 
-- [ ] Module
-  - [ ] app
-    - [ ] header
-      - [ ] company logo
-      - [ ] app logo
-    - [ ] router
-    - [ ] footer
-      - [ ] copyright
-      - [ ] policy
-  - [ ] routing
-    - [ ] lazy load
-  - [ ] component
-    - [ ] loading
-  - [ ] page
-    - [ ] home
-      - [ ] app logo
-      - [ ] input
-        - [ ] URL 格式验证
-      - [ ] submit
-        - [ ] shorten 状态，初始状态
-        - [ ] restore 状态
-        - [ ] invalid 状态，禁止点击
-        - [ ] loading 状态，禁止点击
-      - [ ] history link
-    - [ ] policy
-    - [ ] history
-    - [ ] analysis
-- [ ] Service
-  - [ ] api
-  - [ ] cache
-- [ ] Interceptor
-  - [ ] cache
-- [ ] Style
-  - [ ] responsive
-    - [ ] desktop
-    - [ ] mobile
-  - [ ] link animation
-  - [ ] @angular/material
+- Module
+  - app
+    - header
+      - company logo
+      - app logo
+    - router
+    - footer
+      - copyright
+      - policy
+  - routing
+    - lazy load
+  - component
+    - loading
+  - page
+    - home
+      - app logo
+      - input
+        - URL 格式验证
+      - submit
+        - shorten 状态，初始状态
+        - restore 状态
+        - invalid 状态，禁止点击
+        - loading 状态，禁止点击
+      - history link
+    - policy
+    - history
+    - analysis
+- Service
+  - api
+    - `POST /`
+  - cache
+    - cache local map
+- Interceptor
+  - cache
+- Style
+  - responsive
+    - desktop
+    - mobile
+  - link animation
+  - @angular/material
 
 # Functional
 

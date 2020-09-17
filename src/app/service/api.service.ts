@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+export const HOST = 'http://mock.don.red/tinyurl';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
   private apis = {
-    transform: 'http://mock.don.red/tinyurl',
-    view: 'http://mock.don.red/tinyurl/view',
-    site: 'http://mock.don.red/tinyurl/site'
+    transform: `${HOST}`,
+    view: `${HOST}/view`,
+    site: `${HOST}/site`
   };
 
   constructor(
