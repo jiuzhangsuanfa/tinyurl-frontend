@@ -49,8 +49,9 @@
 - Service
   - API
     - `POST /`
-    - `GET /view?day=7&order=DESC`
-    - `GET /view/host?day=7&order=DESC`
+    - `GET /views/amount?day=7&order=DESC`
+    - `GET /views/visitors?day=7&order=DESC`
+    - `GET /views/hosts?day=7&order=DESC`
   - Cache
     - Cache Map
     - Load from cache
@@ -71,53 +72,42 @@
 
 ### 1. Transform URL
 
-#### 1.0 All in one
+#### 1.1 All in one
 
 > 长网址生成短网址，短网址还原长网址。
 
-| 键       | 值                |
-| -------- | ----------------- |
-| 路径     | `POST /url`       |
-| 路径参数 | 无                |
-| 传入数据 | `{ url: string }` |
-| 返回数据 | `{ url: string }` |
-
-#### 1.1 Shorten
-
-> 生成短网址。
-
-| 键       | 值                |
-| -------- | ----------------- |
-| 路径     | `POST /url/short` |
-| 路径参数 | 无                |
-| 传入数据 | `{ url: string }` |
-| 返回数据 | `{ url: string }` |
-
-#### 1.2 Restore
-
-> 还原长网址。
-
-| 键       | 值                 |
-| -------- | ------------------ |
-| 路径     | `POST /url/origin` |
-| 路径参数 | 无                 |
-| 传入数据 | `{ url: string }`  |
-| 返回数据 | `{ url: string }`  |
+| 键       | 值                    |
+| -------- | --------------------- |
+| 路径     | `POST /url/transform` |
+| 路径参数 | 无                    |
+| 传入数据 | `{ url: string }`     |
+| 返回数据 | `{ url: string }`     |
 
 ### 2. Page View
 
-#### 2.1 Get page view of last 7 days
+#### 2.1 Get page views of last 7 days
 
 > 获取最近 7 天的访问数量。
 
 | 键       | 值                                       |
 | -------- | ---------------------------------------- |
-| 路径     | `GET /views`                             |
+| 路径     | `GET /views/amount`                      |
 | 路径参数 | `{ day: number, order: 'desc' | 'asc' }` |
 | 传入数据 | 无                                       |
 | 返回数据 | `{ count: number }[]`                    |
 
-#### 2.2 Get the 10 most visited hosts of last 7 days
+#### 2.2 Get page visitors of last 7 days
+
+> 获取最近 7 天的访问数量。
+
+| 键       | 值                                       |
+| -------- | ---------------------------------------- |
+| 路径     | `GET /views/visitors`                    |
+| 路径参数 | `{ day: number, order: 'desc' | 'asc' }` |
+| 传入数据 | 无                                       |
+| 返回数据 | `{ count: number }[]`                    |
+
+#### 2.3 Get the 10 most visited hosts of last 7 days
 
 > 获取最近 7 天访问最多的域名（不含子域名）。
 
