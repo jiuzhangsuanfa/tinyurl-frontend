@@ -32,7 +32,7 @@
         - State output
       - Submit
         - shorten state, initial state
-        - restore state
+        - after shorten, auto copy
         - invalid state, disable to click
         - loading state, disable to click
       - History Link
