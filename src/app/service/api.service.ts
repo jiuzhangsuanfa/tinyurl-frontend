@@ -1,36 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-export const HOST = 'http://mock.don.red/tinyurl';
+import { HOST } from '../@constant';
+import { Link } from '../@types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private apis = {
-    transform: `${HOST}`,
-    view: `${HOST}/view`,
-    site: `${HOST}/site`
+  private urls = {
+    // prefix: `${HOST}/prefix`,
+    shorten: `${HOST}/url`,
+    // restore: `${HOST}/url`
   };
 
   constructor(
     private http: HttpClient
   ) { }
 
-  transformURL(data: { url: string }) {
+  // getPrefix() {
+  //   return this.http
+  //     .get<Link>(this.urls.prefix);
+  // }
+
+  shorten(data: { url: string }) {
     return this.http
-      .post(this.apis.transform, data);
+      .post<Link>(this.urls.shorten, data);
   }
 
-  getLastWeekViews() {
-    return this.http
-      .get(this.apis.view, { params: { day: '7', order: 'DESC' } });
-  }
-
-  getLastWeekTop10Site() {
-    return this.http
-      .get(this.apis.site, { params: { day: '7', order: 'DESC' } })
-  }
+  // restore(data: { url: string }) {
+  //   return this.http
+  //     .post<Link>(this.urls.restore, data);
+  // }
 
 }
