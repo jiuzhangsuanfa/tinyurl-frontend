@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatRippleModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
@@ -10,10 +11,9 @@ import { MaterialModule } from '../module/material.module';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 import { PolicyComponent } from './policy/policy.component';
-import { AnalysisComponent } from './analysis/analysis.component';
 
 @NgModule({
-  declarations: [HomeComponent, PolicyComponent, HistoryComponent, AnalysisComponent],
+  declarations: [HomeComponent, PolicyComponent, HistoryComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -23,7 +23,8 @@ import { AnalysisComponent } from './analysis/analysis.component';
     HttpClientModule,
     MatSnackBarModule,
     RouterModule,
-    MatListModule
+    MatListModule,
+    MatRippleModule
   ],
   exports: [HomeComponent]
 })
