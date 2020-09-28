@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CacheService, Record } from 'src/app/service/cache.service';
+import { Record } from 'src/app/@types';
+import { CacheService } from 'src/app/service/cache.service';
 
 @Component({
   selector: 'app-history',

@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="records.length; else elseTemplate">
   <div class="list">
-    <a class="item" [href]="record.short" *ngFor="let record of records">
+    <a class="item" [href]="record.short" *ngFor="let record of records" mat-ripple>
       <img class="favicon" src="https://cdn.jsdelivr.net/gh/devindon/api/image/link-icon-blue.png" alt="Favicon">
       <div class="title">TinyURL - 短网址生成器 | 九章算法九日项目课九章算法九日项目课</div>
       <div class="link">{{ record.host }}</div>

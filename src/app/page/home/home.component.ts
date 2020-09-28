@@ -3,22 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, delay, finalize } from 'rxjs/operators';
 import { ApiService } from 'src/app/service/api.service';
-
-const URL_REG = /^(http[s]?):\/\/(.*)$/;
-const HOST_REG = /mock.don.red\/tinyurl\//;
-
-function isValidURL(url: string): boolean {
-  return !!url.match(URL_REG);
-}
-
-function isLongURL(url: string): boolean {
-  const match = url.match(URL_REG);
-  return !match[2] || !match[2].match(HOST_REG)
-}
-
-function isShortURL(url: string): boolean {
-  return isValidURL(url) && !isLongURL(url);
-}
+import { ButtonText, Icon, isInvalidURL, isLongURL, isShortURL, REG_IS_VALID_URL, Tip } from 'src/app/util';
 
 @Component({
   selector: 'app-home',
@@ -29,9 +14,9 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
 
-  icon: 'help_outline' | 'link' | 'link_off' = 'help_outline';
-  tip: 'Enter your link to continue' | 'Generate short link' | 'Restore original links' = 'Enter your link to continue';
-  button: 'Invalid' | 'Shorten' | 'Restore' = 'Shorten';
+  icon: Icon = Icon.invalid;
+  tip: Tip = Tip.invalid;
+  button: ButtonText = ButtonText.shorten;
   loading: boolean = false;
   form: FormGroup;
 
@@ -47,7 +32,7 @@ export class HomeComponent implements OnInit {
           Validators.minLength(0),
           Validators.maxLength(4096),
           // url pattern
-          Validators.pattern(URL_REG)
+          Validators.pattern(REG_IS_VALID_URL)
         ]
       )
     });
@@ -57,32 +42,32 @@ export class HomeComponent implements OnInit {
 
   onInput() {
     const url = this.form.get('url').value;
-    if (!isValidURL(url)) {
+    if (isInvalidURL(url)) {
       // 未输入或输入的不是 URL
-      this.icon = 'help_outline';
-      this.tip = 'Enter your link to continue';
-      this.button = 'Invalid';
+      this.icon = Icon.invalid;
+      this.tip = Tip.invalid;
+      this.button = ButtonText.invalid;
     } else if (isLongURL(url)) {
       // 输入的是外链
-      this.icon = 'link';
-      this.tip = 'Generate short link';
-      this.button = 'Shorten';
+      this.icon = Icon.shorten;
+      this.tip = Tip.shorten;
+      this.button = ButtonText.shorten;
     } else if (isShortURL(url)) {
       // 输入的是短链
-      this.icon = 'link_off';
-      this.tip = 'Restore original links';
-      this.button = 'Restore';
+      this.icon = Icon.copy;
+      this.tip = Tip.copy;
+      this.button = ButtonText.copy;
     }
   }
 
   submit() {
     this.loading = true;
     this.api
-      .transformURL({ url: this.form.get('url').value })
+      .shorten({ url: this.form.get('url').value })
       .pipe(
         delay(1000),
         catchError(error => {
-          this.bar.open('URL get failed', 'OK');
+          this.bar.open('URL shorten failed', 'OK');
           throw error;
         }),
         finalize(() => this.loading = false)
@@ -92,6 +77,7 @@ export class HomeComponent implements OnInit {
         this.input.nativeElement.select();
         document.execCommand('copy');
         this.onInput();
+        this.button = ButtonText.copied;
         this.bar.open('Link has been copied.', 'OK', { duration: 3000, horizontalPosition: 'end' });
       });
   }

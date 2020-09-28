@@ -1,21 +1,14 @@
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Link } from '../@types/index';
+import { Link, Record } from '../@types';
 
-export const CACHE_KEY = 'records';
+const CACHE_KEY = 'records';
 
-export const PREFIX = 'http://mock.don.red/tinyurl/s/';
+const PREFIX = 'http://mock.don.red/tinyurl/s/';
 
-export const REG_HOST = /http[s]?:\/\/(.*?)\//;
+const REG_HOST = /http[s]?:\/\/(.*?)\//;
 
-export const REG_ID = new RegExp(PREFIX + '(.*)[/]?');
-
-export interface Record {
-  id: string;
-  short: string;
-  host: string;
-  origin: string;
-}
+const REG_ID = new RegExp(PREFIX + '(.*)[/]?');
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +22,6 @@ export class CacheService {
   }
 
   insert(links: string[]) {
-    console.log(links)
     const matched = links[0].match(REG_ID);
     const record: Record = { // push it
       id: matched ? matched[1] : links[1].match(REG_ID)[1],
@@ -50,9 +42,13 @@ export class CacheService {
     localStorage.setItem(CACHE_KEY, JSON.stringify(this.list));
   }
 
-  delete() { }
+  delete() {
+    throw new Error('not implement');
+  }
 
-  modify() { }
+  modify() {
+    throw new Error('not implement');
+  }
 
   select({ url }: Link): string {
     const matched = url.match(REG_ID);
