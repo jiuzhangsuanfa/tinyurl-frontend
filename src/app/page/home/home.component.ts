@@ -5,6 +5,20 @@ import { catchError, delay, finalize } from 'rxjs/operators';
 import { ApiService } from 'src/app/service/api.service';
 
 const URL_REG = /^(http[s]?):\/\/(.*)$/;
+const HOST_REG = /mock.don.red\/tinyurl\//;
+
+function isValidURL(url: string): boolean {
+  return !!url.match(URL_REG);
+}
+
+function isLongURL(url: string): boolean {
+  const match = url.match(URL_REG);
+  return !match[2] || !match[2].match(HOST_REG)
+}
+
+function isShortURL(url: string): boolean {
+  return isValidURL(url) && !isLongURL(url);
+}
 
 @Component({
   selector: 'app-home',
@@ -42,18 +56,18 @@ export class HomeComponent implements OnInit {
   ngOnInit() { }
 
   onInput() {
-    const match = this.form.get('url').value.match(URL_REG);
-    if (!match) {
+    const url = this.form.get('url').value;
+    if (!isValidURL(url)) {
       // 未输入或输入的不是 URL
       this.icon = 'help_outline';
       this.tip = 'Enter your link to continue';
       this.button = 'Invalid';
-    } else if (!match[2] || !match[2].match(/mock.don.red\/tinyurl\//)) {
+    } else if (isLongURL(url)) {
       // 输入的是外链
       this.icon = 'link';
       this.tip = 'Generate short link';
       this.button = 'Shorten';
-    } else {
+    } else if (isShortURL(url)) {
       // 输入的是短链
       this.icon = 'link_off';
       this.tip = 'Restore original links';
@@ -68,7 +82,7 @@ export class HomeComponent implements OnInit {
       .pipe(
         delay(1000),
         catchError(error => {
-          this.bar.open('URL get failed');
+          this.bar.open('URL get failed', 'OK');
           throw error;
         }),
         finalize(() => this.loading = false)
@@ -78,7 +92,7 @@ export class HomeComponent implements OnInit {
         this.input.nativeElement.select();
         document.execCommand('copy');
         this.onInput();
-        this.bar.open('Link has been copied.', 'Got it', { duration: 3000, horizontalPosition: 'end' });
+        this.bar.open('Link has been copied.', 'OK', { duration: 3000, horizontalPosition: 'end' });
       });
   }
 
