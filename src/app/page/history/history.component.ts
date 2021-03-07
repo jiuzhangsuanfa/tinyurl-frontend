@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Record } from 'src/app/@types';
+import { Host, Link } from 'src/app/@types';
 import { CacheService } from 'src/app/service/cache.service';
 
 @Component({
@@ -9,12 +9,14 @@ import { CacheService } from 'src/app/service/cache.service';
 })
 export class HistoryComponent implements OnInit {
 
-  records: Record[] = [];
+  records: Link[] = [];
+  hosts: Host[] = [];
 
   constructor(
     public cache: CacheService,
   ) {
     this.records = cache.selectAll();
+    this.hosts = cache.getHosts();
   }
 
   ngOnInit() { }

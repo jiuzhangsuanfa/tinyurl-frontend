@@ -96,7 +96,8 @@
     <input #input matInput formControlName="url" placeholder="https://your.example.com/some/path" autocomplete="off"
       type="url" (input)="onInput()" [readOnly]="loading">
     <mat-label>Shorten your link</mat-label>
-    <mat-icon matSuffix style="color: #949494;" [matTooltip]="tip">{{ icon }}</mat-icon>
+    <mat-icon matSuffix style="color: #949494;" [matTooltip]="tip" (click)="icon === 'content_copy' && copy()">
+      {{ icon }}</mat-icon>
   </mat-form-field>
 
   <button color="primary" [disabled]="form.invalid || loading" (click)="submit()" mat-raised-button>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HOST } from '../@constant';
-import { Link } from '../@types';
+import { Host, Link } from '../@types';
 
 @Injectable({
   providedIn: 'root',
@@ -9,28 +9,22 @@ import { Link } from '../@types';
 export class ApiService {
 
   private urls = {
-    // prefix: `${HOST}/prefix`,
-    shorten: `${HOST}/url`,
-    // restore: `${HOST}/url`
+    hosts: `${HOST}/hosts`,
+    transform: `${HOST}/link`,
   };
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  // getPrefix() {
-  //   return this.http
-  //     .get<Link>(this.urls.prefix);
-  // }
-
-  shorten(data: { url: string }) {
+  getHosts() {
     return this.http
-      .post<Link>(this.urls.shorten, data);
+      .get<Host[]>(this.urls.hosts);
   }
 
-  // restore(data: { url: string }) {
-  //   return this.http
-  //     .post<Link>(this.urls.restore, data);
-  // }
+  transform(data: { url: string }) {
+    return this.http
+      .post<Link>(this.urls.transform, data);
+  }
 
 }

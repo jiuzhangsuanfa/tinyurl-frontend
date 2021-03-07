@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './service/api.service';
+import { CacheService } from './service/cache.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  constructor(
+    private api: ApiService,
+    private cache: CacheService,
+  ) { }
+
   ngOnInit() {
     document.oncontextmenu = () => false;
+    this.api.getHosts()
+      .subscribe(this.cache.setHosts.bind(this.cache));
   }
 
 }
