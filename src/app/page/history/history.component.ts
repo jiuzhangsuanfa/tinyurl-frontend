@@ -9,16 +9,24 @@ import { CacheService } from 'src/app/service/cache.service';
 })
 export class HistoryComponent implements OnInit {
 
-  records: Link[] = [];
-  hosts: Host[] = [];
+  links: Link[] = [];
+  domain: string;
 
   constructor(
     public cache: CacheService,
   ) {
-    this.records = cache.selectAll();
-    this.hosts = cache.getHosts();
+    this.links = cache.selectAll();
+    this.domain = cache.getDomain();
   }
 
   ngOnInit() { }
+
+  getUrl(id: string) {
+    return `https://${this.domain}/${id}`;
+  }
+
+  getHostname(url: string) {
+    return new URL(url).hostname;
+  }
 
 }

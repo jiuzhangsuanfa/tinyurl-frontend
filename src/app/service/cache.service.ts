@@ -18,8 +18,11 @@ export class CacheService {
     this.links = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
   }
 
-  insert(links: string[]) {
-    throw new Error('not implement');
+  insert(link: Link) {
+    if (!this.links.find(item => item.id === link.id)) {
+      this.links.push(link);
+    };
+    this.save();
   }
 
   save() {
@@ -34,16 +37,16 @@ export class CacheService {
     throw new Error('not implement');
   }
 
-  select(link: Link): string | undefined {
-    throw new Error('not implement');
+  select(url: string): Link | undefined {
+    return this.links.find(link => link.id === url || link.origin === url);
   }
 
   selectAll(): Link[] {
-    throw new Error('not implement');
+    return this.links;
   }
 
   cacheAble(request: HttpRequest<any>) {
-    throw new Error('not implement');
+    return request.url.indexOf('/hosts') || request.url.indexOf('/link');
   }
 
   setHosts(hosts: Host[]) {

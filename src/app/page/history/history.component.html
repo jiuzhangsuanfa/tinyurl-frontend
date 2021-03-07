@@ -1,11 +1,11 @@
 <h2 style="text-align: center;">History</h2>
 
-<ng-container *ngIf="records.length; else elseTemplate">
+<ng-container *ngIf="links.length; else elseTemplate">
   <div class="list">
-    <a class="item" [href]="record.id" *ngFor="let record of records" mat-ripple>
+    <a class="item" [href]="getUrl(link.id)" *ngFor="let link of links" mat-ripple>
       <img class="favicon" src="https://cdn.jsdelivr.net/gh/devindon/api/image/link-icon-blue.png" alt="Favicon">
       <div class="title">TinyURL - 短网址生成器 | 九章算法九日项目课九章算法九日项目课</div>
-      <div class="link">{{ hosts[0] }}</div>
+      <div class="link">{{ getHostname(link.origin) }}</div>
       <div class="time">{{ '2020-02-03 19:08:09' | date:"HH:mm" }}</div>
     </a>
   </div>
