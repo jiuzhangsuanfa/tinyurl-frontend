@@ -7,11 +7,11 @@ import { PolicyComponent } from './page/policy/policy.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'policy', component: PolicyComponent },
-  { path: 'history', component: HistoryComponent }
+  { path: 'history', component: HistoryComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

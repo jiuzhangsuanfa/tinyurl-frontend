@@ -8,21 +8,21 @@ import { ButtonText, Icon, isInvalidURL, isLongURL, isShortURL, REG_IS_VALID_URL
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild('input') input: ElementRef<HTMLInputElement>;
+  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
   icon: Icon = Icon.invalid;
   tip: Tip = Tip.invalid;
   button: ButtonText = ButtonText.shorten;
-  loading: boolean = false;
+  loading = false;
   form: FormGroup;
 
   constructor(
     private api: ApiService,
-    private bar: MatSnackBar
+    private bar: MatSnackBar,
   ) {
     this.form = new FormGroup({
       url: new FormControl(
@@ -32,16 +32,16 @@ export class HomeComponent implements OnInit {
           Validators.minLength(0),
           Validators.maxLength(4096),
           // url pattern
-          Validators.pattern(REG_IS_VALID_URL)
-        ]
-      )
+          Validators.pattern(REG_IS_VALID_URL),
+        ],
+      ),
     });
   }
 
   ngOnInit() { }
 
   onInput() {
-    const url = this.form.get('url').value;
+    const url = this.form.get('url')?.value;
     if (isInvalidURL(url)) {
       // 未输入或输入的不是 URL
       this.icon = Icon.invalid;
@@ -63,14 +63,14 @@ export class HomeComponent implements OnInit {
   submit() {
     this.loading = true;
     this.api
-      .shorten({ url: this.form.get('url').value })
+      .shorten({ url: this.form.get('url')?.value })
       .pipe(
         delay(1000),
         catchError(error => {
           this.bar.open('URL shorten failed', 'OK');
           throw error;
         }),
-        finalize(() => this.loading = false)
+        finalize(() => this.loading = false),
       )
       .subscribe(({ url }: { url: string }) => {
         this.form.setValue({ url });

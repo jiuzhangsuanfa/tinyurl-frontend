@@ -24,8 +24,8 @@ import { PolicyComponent } from './policy/policy.component';
     MatSnackBarModule,
     RouterModule,
     MatListModule,
-    MatRippleModule
+    MatRippleModule,
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent],
 })
 export class PageModule { }

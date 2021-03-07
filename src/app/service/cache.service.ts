@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Link, Record } from '../@types';
@@ -11,7 +12,7 @@ const REG_HOST = /http[s]?:\/\/(.*?)\//;
 const REG_ID = new RegExp(PREFIX + '(.*)[/]?');
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CacheService {
 
@@ -24,10 +25,10 @@ export class CacheService {
   insert(links: string[]) {
     const matched = links[0].match(REG_ID);
     const record: Record = { // push it
-      id: matched ? matched[1] : links[1].match(REG_ID)[1],
+      id: matched ? matched[1] : links[1].match(REG_ID)![1],
       short: matched ? links[0] : links[1],
       origin: matched ? links[1] : links[0],
-      host: (matched ? links[1] : links[0]).match(REG_HOST)[1]
+      host: (matched ? links[1] : links[0]).match(REG_HOST)![1],
     };
     const index = this.list.findIndex(item => item.id === record.id);
     if (index === -1) {
@@ -50,7 +51,7 @@ export class CacheService {
     throw new Error('not implement');
   }
 
-  select({ url }: Link): string {
+  select({ url }: Link): string | undefined {
     const matched = url.match(REG_ID);
     if (matched) {
       return this.list.find(record => record.id === matched[1])?.origin;

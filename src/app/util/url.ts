@@ -1,22 +1,17 @@
+/* eslint-disable no-shadow */
 export const REG_IS_VALID_URL = /^(http[s]?):\/\/(.*)$/;
 export const REG_HOST = /mock.don.red\/tinyurl\//;
 
-export function isValidURL(url: string): boolean {
-  return !!url.match(REG_IS_VALID_URL);
-}
+export const isValidURL = (url: string): boolean => !!url.match(REG_IS_VALID_URL);
 
-export function isInvalidURL(url: string): boolean {
-  return !isValidURL(url);
-}
+export const isInvalidURL = (url: string): boolean => !isValidURL(url);
 
-export function isLongURL(url: string): boolean {
+export const isLongURL = (url: string): boolean => {
   const match = url.match(REG_IS_VALID_URL);
-  return !match[2] || !match[2].match(REG_HOST)
-}
+  return !!match && !match[2] && !match[2].match(REG_HOST);
+};
 
-export function isShortURL(url: string): boolean {
-  return isValidURL(url) && !isLongURL(url);
-}
+export const isShortURL = (url: string): boolean => isValidURL(url) && !isLongURL(url);
 
 export enum Icon {
   invalid = 'help_outline',

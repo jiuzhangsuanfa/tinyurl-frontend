@@ -4,7 +4,7 @@ import { HOST } from '../@constant';
 import { Link } from '../@types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
 
@@ -15,7 +15,7 @@ export class ApiService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   // getPrefix() {
