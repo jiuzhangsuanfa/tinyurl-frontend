@@ -38,15 +38,19 @@ export class CacheService {
   }
 
   select(url: string): Link | undefined {
-    return this.links.find(link => link.id === url || link.origin === url);
+    return this.links.find(link => url.includes(link.id) || link.origin === url);
   }
 
   selectAll(): Link[] {
     return this.links;
   }
 
-  cacheAble(request: HttpRequest<any>) {
-    return request.url.indexOf('/hosts') || request.url.indexOf('/link');
+  isHosts(request: HttpRequest<any>) {
+    return request.url.indexOf('/hosts');
+  }
+
+  isLink(request: HttpRequest<any>) {
+    return request.url.indexOf('/link');
   }
 
   setHosts(hosts: Host[]) {
@@ -59,7 +63,8 @@ export class CacheService {
   }
 
   getDomain() {
-    return this.hosts[0]?.domain || 'example.com';
+    // eslint-disable-next-line no-bitwise
+    return this.hosts[Math.random() * this.hosts.length >> 0]?.domain || 'example.com';
   }
 
 }
