@@ -1,1 +1,1 @@
-export const HOST = 'http://localhost:8080';
+export { HOST } from 'src/environments/environment';
