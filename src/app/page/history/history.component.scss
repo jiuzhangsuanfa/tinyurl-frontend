@@ -31,13 +31,17 @@
       overflow     : hidden;
       text-overflow: ellipsis;
       white-space  : nowrap;
-      flex-grow    : 1;
       margin       : 0 0.5rem;
+    }
+
+    >.title {
+      flex-grow: 1;
     }
 
     >.link {
       font-weight: 100;
       font-size  : small;
+      width: 10rem;
     }
 
     .time {
