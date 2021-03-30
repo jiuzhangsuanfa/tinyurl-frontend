@@ -13,7 +13,7 @@ import { CacheInterceptor } from './util/cache.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CommonModule,
@@ -22,12 +22,12 @@ import { CacheInterceptor } from './util/cache.interceptor';
     ComponentModule,
     PageModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     CacheService,
     { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

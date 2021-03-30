@@ -1,3 +1,6 @@
 export interface Link {
-  url: string;
+  id: string;
+  origin: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

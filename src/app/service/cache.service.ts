@@ -1,45 +1,32 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Link, Record } from '../@types';
+import { Host, Link } from '../@types';
 
-const CACHE_KEY = 'records';
-
-const PREFIX = 'http://mock.don.red/tinyurl/s/';
-
-const REG_HOST = /http[s]?:\/\/(.*?)\//;
-
-const REG_ID = new RegExp(PREFIX + '(.*)[/]?');
+const CACHE_KEY = 'CACHE_KEY';
+const HOSTS_KEY = 'HOSTS_KEY';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CacheService {
 
-  private list: Record[];
+  private links: Link[];
+  private hosts: Host[] = [];
 
   constructor() {
-    this.list = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
+    this.links = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
   }
 
-  insert(links: string[]) {
-    const matched = links[0].match(REG_ID);
-    const record: Record = { // push it
-      id: matched ? matched[1] : links[1].match(REG_ID)[1],
-      short: matched ? links[0] : links[1],
-      origin: matched ? links[1] : links[0],
-      host: (matched ? links[1] : links[0]).match(REG_HOST)[1]
+  insert(link: Link) {
+    if (!this.links.find(item => item.id === link.id)) {
+      this.links.push(link);
     };
-    const index = this.list.findIndex(item => item.id === record.id);
-    if (index === -1) {
-      this.list.push(record);
-    } else {
-      this.list[index] = record;
-    }
     this.save();
   }
 
   save() {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(this.list));
+    localStorage.setItem(CACHE_KEY, JSON.stringify(this.links));
   }
 
   delete() {
@@ -50,21 +37,34 @@ export class CacheService {
     throw new Error('not implement');
   }
 
-  select({ url }: Link): string {
-    const matched = url.match(REG_ID);
-    if (matched) {
-      return this.list.find(record => record.id === matched[1])?.origin;
-    } else {
-      return this.list.find(record => record.origin === url)?.short;
-    }
+  select(url: string): Link | undefined {
+    return this.links.find(link => url.includes(link.id) || link.origin === url);
   }
 
-  selectAll(): Record[] {
-    return [...this.list];
+  selectAll(): Link[] {
+    return this.links;
   }
 
-  cacheAble(request: HttpRequest<any>) {
-    return request.url === 'http://mock.don.red/tinyurl' && request.method === 'POST';
+  isHosts(request: HttpRequest<any>) {
+    return request.url.indexOf('/hosts');
+  }
+
+  isLink(request: HttpRequest<any>) {
+    return request.url.indexOf('/link');
+  }
+
+  setHosts(hosts: Host[]) {
+    this.hosts = hosts;
+    localStorage.setItem(HOSTS_KEY, JSON.stringify(hosts));
+  }
+
+  getHosts() {
+    return this.hosts;
+  }
+
+  getDomain() {
+    // eslint-disable-next-line no-bitwise
+    return this.hosts[Math.random() * this.hosts.length >> 0]?.domain || 'example.com';
   }
 
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
@@ -6,7 +7,7 @@ import { catchError, delay } from 'rxjs/operators';
 @Component({
   selector: 'app-policy',
   templateUrl: './policy.component.html',
-  styleUrls: ['./policy.component.scss']
+  styleUrls: ['./policy.component.scss'],
 })
 export class PolicyComponent implements OnInit {
 
@@ -14,7 +15,7 @@ export class PolicyComponent implements OnInit {
   paragraphs: string[] = [];
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   ngOnInit() {
@@ -60,11 +61,13 @@ Seen you eyes son show. Far two unaffected one alteration apartments celebrated 
 Affronting discretion as do is announcing. Now months esteem oppose nearer enable too six. She numerous unlocked you perceive speedily. Affixed offence spirits or ye of offices between. Real on shot it were four an as. Absolute bachelor rendered six nay you juvenile. Vanity entire an chatty to.
 
 Put all speaking her delicate recurred possible. Set indulgence inquietude discretion insensible bed why announcing. Middleton fat two satisfied additions. So continued he or commanded household smallness delivered. Door poor on do walk in half. Roof his head the what.
-`)
+`),
         ),
-        delay(3000)
+        delay(3000),
       )
-      .subscribe((content: string) => this.paragraphs = content.split('\n').filter(v => v));
+      .subscribe(
+        (content: string | any) => typeof content === 'string' && (this.paragraphs = content.split('\n').filter(v => v)),
+      );
   }
 
 }

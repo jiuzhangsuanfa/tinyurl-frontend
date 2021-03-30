@@ -9,7 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
 })
 export class MaterialModule { }
