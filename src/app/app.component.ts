@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     document.oncontextmenu = () => false;
     this.api.getHosts()
-      .subscribe(this.cache.setHosts.bind(this.cache));
+      .subscribe(hosts => this.cache.setHosts(hosts.list));
   }
 
 }

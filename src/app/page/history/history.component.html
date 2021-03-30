@@ -7,7 +7,7 @@
       <!-- <div class="title">TinyURL - 短网址生成器 | 九章算法九日项目课九章算法九日项目课</div> -->
       <div class="title">{{ getHostname(link.origin) }}</div>
       <div class="link">{{ getHostname(link.origin) }}</div>
-      <div class="time">{{ link.timestamp | date:"MM-dd HH:mm" }}</div>
+      <div class="time">{{ link.createdAt | date:"MM-dd HH:mm" }}</div>
     </a>
   </div>
 </ng-container>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Host, Link } from 'src/app/@types';
+import { Link } from 'src/app/@types';
 import { CacheService } from 'src/app/service/cache.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class HistoryComponent implements OnInit {
   }
 
   getLinks() {
-    return this.cache.selectAll().sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    return this.cache.selectAll().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
   trackBy(index: number, item: Link) {

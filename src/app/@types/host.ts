@@ -1,5 +1,11 @@
 export interface Host {
   domain: string;
-  created: Date;
-  expired: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  expiredAt: Date;
+}
+
+export interface Hosts {
+  next: string;
+  list: Host[];
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HOST } from '../@constant';
-import { Host, Link } from '../@types';
+import { Host, Hosts, Link } from '../@types';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class ApiService {
 
   getHosts() {
     return this.http
-      .get<Host[]>(this.urls.hosts);
+      .get<Hosts>(this.urls.hosts);
   }
 
   transform(data: { url: string }) {
